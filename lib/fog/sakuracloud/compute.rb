@@ -1,8 +1,8 @@
 require 'fog/sakuracloud'
-require 'fog/volume'
+require 'fog/compute'
 
 module Fog
-  module Volume
+  module Compute
     class SakuraCloud < Fog::Service
 
       requires     :sakuracloud_api_token
@@ -10,16 +10,12 @@ module Fog
 
       recognizes   :sakuracloud_api_url
 
-      model_path 'fog/sakuracloud/models/volume'
-      model      :archive
-      collection :archives
-      model      :disk
-      collection :disks
+      model_path 'fog/sakuracloud/models/compute'
+      model      :ssh_key
+      collection :ssh_keys
 
-      request_path 'fog/sakuracloud/requests/volume'
-      request      :list_disks
-      request      :create_disk
-      request      :list_archives
+      request_path 'fog/sakuracloud/requests/compute'
+      request      :list_ssh_keys
 
       class Real
         def initialize(options = {})
@@ -52,5 +48,5 @@ module Fog
       end
 
     end #SakuraCloud
-  end #Volume
+  end #Compute
 end
