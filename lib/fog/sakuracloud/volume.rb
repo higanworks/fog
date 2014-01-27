@@ -19,6 +19,9 @@ module Fog
       request_path 'fog/sakuracloud/requests/volume'
       request      :list_disks
       request      :create_disk
+      request      :configure_disk
+      request      :attach_disk
+      request      :delete_disk
       request      :list_archives
 
       class Real
