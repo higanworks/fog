@@ -11,11 +11,24 @@ module Fog
       recognizes   :sakuracloud_api_url
 
       model_path 'fog/sakuracloud/models/compute'
+      model      :server
+      collection :servers
+      model      :plan
+      collection :plans
       model      :ssh_key
       collection :ssh_keys
+      model      :zone
+      collection :zones
 
       request_path 'fog/sakuracloud/requests/compute'
+      request      :list_servers
+      request      :create_server
+      request      :delete_server
+      request      :boot_server
+      request      :stop_server
+      request      :list_plans
       request      :list_ssh_keys
+      request      :list_zones
 
       class Real
         def initialize(options = {})
