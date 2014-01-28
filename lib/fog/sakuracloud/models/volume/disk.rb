@@ -34,6 +34,7 @@ module Fog
           until @attributes[:Availability] == 'available'
             raise "Resource not available untill #{count * 3} seconds" if count > retry_count
             sleep 3
+            print '.'
             reload
             count = count + 1
           end
