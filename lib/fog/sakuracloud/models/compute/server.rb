@@ -36,6 +36,12 @@ module Fog
         end
         alias_method :destroy, :delete
 
+        def wait_for
+          requires :ID
+          ip = @attributes[:Interfaces].first['IPAddress']
+          ssh = Fog::SSH.new(ip, 'root', :timeout => 3)
+          ssh.run('id')
+        end
       end
     end
   end
