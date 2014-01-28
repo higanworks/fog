@@ -21,7 +21,6 @@ module Fog
         def create_with(options = {})
           Fog::Logger.warning("Create Volume")
           volume = Fog::Volume::SakuraCloud.new(:sakuracloud_api_token => options[:sakuracloud_api_token], :sakuracloud_api_token_secret => options[:sakuracloud_api_token_secret])
-          # compute = Fog::Compute::SakuraCloud.new(:sakuracloud_api_token => options[:sakuracloud_api_token], :sakuracloud_api_token_secret => options[:sakuracloud_api_token_secret])
           disk = volume.disks.create :Name => Fog::UUID.uuid,
                               :Plan  => options[:diskplan].to_i,
                               :SourceArchive => options[:sourcearchive].to_s
