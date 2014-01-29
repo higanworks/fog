@@ -7,8 +7,6 @@ module Fog
 
         def configure_disk( disk_id, sshkey_id )
           body = {
-#            "Password" => "hogehoge",
-            "UserSubnet" => {},
             "SSHKey" => {"ID" => sshkey_id.to_s }
           }
 

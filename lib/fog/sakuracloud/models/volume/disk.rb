@@ -27,6 +27,12 @@ module Fog
           true
         end
 
+        def configure(sshkey_id)
+          requires :ID
+          service.configure_disk(@attributes[:ID], sshkey_id )
+          true
+        end
+
         def wait_for(retry_count = 20)
           requires :ID
           reload
