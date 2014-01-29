@@ -13,11 +13,14 @@ module Fog
       model_path 'fog/sakuracloud/models/volume'
       model      :archive
       collection :archives
+      model      :plan
+      collection :plans
       model      :disk
       collection :disks
 
       request_path 'fog/sakuracloud/requests/volume'
       request      :list_disks
+      request      :list_plans
       request      :create_disk
       request      :configure_disk
       request      :attach_disk
