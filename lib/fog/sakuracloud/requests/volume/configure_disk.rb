@@ -6,7 +6,11 @@ module Fog
       class Real
 
         def configure_disk( disk_id, sshkey_id )
-          body = { "SSHKey" => {"ID" => sshkey_id.to_s } }
+          body = {
+#            "Password" => "hogehoge",
+            "UserSubnet" => {},
+            "SSHKey" => {"ID" => sshkey_id.to_s }
+          }
 
           request(
             :headers => {
