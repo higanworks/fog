@@ -18,7 +18,7 @@ module Fog
       end # Real
 
       class Mock
-        def delete_disk(options = {})
+        def delete_disk( id )
           response = Excon::Response.new
           response.status = 200
           response.body = {

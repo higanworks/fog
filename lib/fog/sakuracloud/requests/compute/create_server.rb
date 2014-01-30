@@ -31,7 +31,7 @@ module Fog
       end # Real
 
       class Mock
-        def create_server(options = {})
+        def create_server( name, serverplan )
           response = Excon::Response.new
           response.status = 201
           response.body = {

@@ -21,7 +21,7 @@ module Fog
       end # Real
 
       class Mock
-        def delete_server(options = {})
+        def delete_server( id, force = false, disks = [] )
           response = Excon::Response.new
           response.status = 200
           response.body = {

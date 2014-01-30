@@ -61,6 +61,16 @@ volume = Fog::Volume::SakuraCloud.new(
 )
 ```
 
+or initailize with `Fog.credentials`
+
+
+```
+Fog.credentials[:sakuracloud_api_token] = 'YOUR_API_TOKEN'
+Fog.credentials[:sakuracloud_api_token_secret] = 'YOUR_API_TOKEN_SECRET'
+
+volume = Fog::Volume[:sakuracloud]
+```
+
 
 #### Listing disk plans
 
@@ -299,6 +309,139 @@ use `configure` method with SSH Key ID.
 
 ### Compute Service
 
+Initailize Compute service.
 
-TODO: Write...
+```
+require 'fog'
+compute = Fog::Compute::SakuraCloud.new(
+  :sakuracloud_api_token => 'YOUR_API_TOKEN',
+  :sakuracloud_api_token_secret => 'YOUR_API_TOKEN_SECRET'
+)
+```
 
+or initailize with `Fog.credentials`
+
+
+```
+Fog.credentials[:sakuracloud_api_token] = 'YOUR_API_TOKEN'
+Fog.credentials[:sakuracloud_api_token_secret] = 'YOUR_API_TOKEN_SECRET'
+
+volume = Fog::Compute[:sakuracloud]
+```
+
+
+#### Listing server plans
+
+use `compute.plans`.
+
+```
+> compute.plans
+
+=> [  <Fog::Compute::SakuraCloud::Plan
+    ID=1001,
+    Name="プラン/1Core-1GB",
+    ServiceClass="cloud/plan/1core-1gb",
+    CPU=1,
+    MemoryMB=1024
+  >,
+   <Fog::Compute::SakuraCloud::Plan
+    ID=2001,
+    Name="プラン/1Core-2GB",
+    ServiceClass="cloud/plan/1core-2gb",
+    CPU=1,
+    MemoryMB=2048
+  >,
+-- snip --
+```
+
+
+#### Listing zones
+
+use `compute.zones`.
+
+```
+> compute.zones
+
+=> [  <Fog::Compute::SakuraCloud::Zone
+    ID=31001,
+    Name="is1a",
+    Description="石狩第1ゾーン"
+  >,
+   <Fog::Compute::SakuraCloud::Zone
+    ID=31002,
+    Name="is1b",
+    Description="石狩第2ゾーン"
+  >]
+```
+
+#### Create server
+
+use `volume.servers.create` with `:Name`, `:ServerPlan`(Plan ID)
+
+##### Example: Create server with public switch connection.
+
+```
+server = compute.servers.create :Name => 'foobar',
+                                :ServerPlan  => 2001
+```
+
+It creates server.
+
+```
+=>   <Fog::Compute::SakuraCloud::Server
+    ID="112600055437",
+    Name="foobar",
+    ServerPlan={"ID"=>2001, "Name"=>"プラン/1Core-2GB", "CPU"=>1, "MemoryMB"=>2048, "ServiceClass"=>"cloud/plan/1core-2gb", "Availability"=>"available"},
+    Instance={"Server"=>{"ID"=>"112600055437"}, "Status"=>"down", "BeforeStatus"=>nil, "StatusChangedAt"=>nil, "MigrationProgress"=>nil, "MigrationSchedule"=>nil, "IsMigrating"=>nil, "MigrationAllowed"=>nil, "ModifiedAt"=>"2014-01-30T23:54:47+09:00", "Host"=>nil, "CDROM"=>nil, "CDROMStorage"=>nil},
+    Disks=[],
+    Interfaces=[{"ID"=>"112600055438", "MACAddress"=>"9C:A3:BA:30:13:28", "IPAddress"=>"133.242.236.247", "UserIPAddress"=>nil, "HostName"=>nil, "Switch"=>{"ID"=>"112500556860", "Name"=>"スイッチ", "Scope"=>"shared", "Subnet"=>{"ID"=>nil, "NetworkAddress"=>"133.242.236.0", "NetworkMaskLen"=>24, "DefaultRoute"=>"133.242.236.1", "Internet"=>{"BandWidthMbps"=>100}}, "UserSubnet"=>nil}, "PacketFilter"=>nil}]
+  >
+```
+
+#### Listing available servers
+
+use `compute.servers`
+
+```
+> compute.servers
+
+=> [  <Fog::Compute::SakuraCloud::Server
+    ID="112600055437",
+    Name="foobar",
+    ServerPlan={"ID"=>2001, "Name"=>"プラン/1Core-2GB", "CPU"=>1, "MemoryMB"=>2048, "ServiceClass"=>"cloud/plan/1core-2gb", "Availability"=>"available"},
+    Instance={"Server"=>{"ID"=>"112600055437"}, "Status"=>"down", "BeforeStatus"=>nil, "StatusChangedAt"=>nil, "MigrationProgress"=>nil, "MigrationSchedule"=>nil, "IsMigrating"=>nil, "MigrationAllowed"=>nil, "ModifiedAt"=>"2014-01-30T23:54:47+09:00", "Host"=>nil, "CDROM"=>nil, "CDROMStorage"=>nil},
+    Disks=[],
+    Interfaces=[{"ID"=>"112600055438", "MACAddress"=>"9C:A3:BA:30:13:28", "IPAddress"=>"133.242.236.247", "UserIPAddress"=>nil, "HostName"=>nil, "Switch"=>{"ID"=>"112500556860", "Name"=>"スイッチ", "Scope"=>"shared", "Subnet"=>{"ID"=>nil, "NetworkAddress"=>"133.242.236.0", "NetworkMaskLen"=>24, "DefaultRoute"=>"133.242.236.1", "Internet"=>{"BandWidthMbps"=>100}}, "UserSubnet"=>nil}, "PacketFilter"=>nil}]
+  >]
+
+```
+
+
+#### Boot or stop servers
+
+execute boot/stop method for server.
+
+
+##### Example: boot server
+
+```
+> compute.servers.first.boot
+
+=> true
+```
+
+##### Example: stop server
+
+```
+> compute.servers.first.stop
+
+=> true
+```
+
+force stop
+
+```
+> compute.servers.first.stop(true)
+
+=> true
+```

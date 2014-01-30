@@ -23,7 +23,7 @@ module Fog
       end # Real
 
       class Mock
-        def configure_disk(options = {})
+        def configure_disk( disk_id, sshkey_id )
           response = Excon::Response.new
           response.status = 200
           response.body = {

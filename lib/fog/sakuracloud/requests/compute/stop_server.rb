@@ -20,11 +20,12 @@ module Fog
             :path => "#{Fog::SakuraCloud::SAKURACLOUD_API_ENDPOINT}/server/#{id}/power",
             :body => Fog::JSON.encode(body),
           )
+          true
         end
       end # Real
 
       class Mock
-        def stop_server(options = {})
+        def stop_server( id, force = false )
           response = Excon::Response.new
           response.status = 202
           response.body = {

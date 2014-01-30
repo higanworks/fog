@@ -14,11 +14,12 @@ module Fog
             :method => 'PUT',
             :path => "#{Fog::SakuraCloud::SAKURACLOUD_API_ENDPOINT}/server/#{id}/power"
           )
+          true
         end
       end # Real
 
       class Mock
-        def boot_server(options = {})
+        def boot_server( id )
           response = Excon::Response.new
           response.status = 200
           response.body = {

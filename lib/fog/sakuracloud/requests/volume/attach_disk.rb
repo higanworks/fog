@@ -19,7 +19,7 @@ module Fog
       end # Real
 
       class Mock
-        def attach_disk(options = {})
+        def attach_disk( disk_id, server_id )
           response = Excon::Response.new
           response.status = 200
           response.body = {

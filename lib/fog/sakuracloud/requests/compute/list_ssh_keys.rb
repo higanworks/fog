@@ -23,17 +23,14 @@ module Fog
           "SSHKeys"=>
             [
             {"Index"=>0,
-              "ID"=>"888888888888",
-              "Description"=>"",
-              "PublicKey"=>"ssh-rsa dummy",
-              "CreatedAt"=>"2014-01-21T12:44:39+09:00"},
+              :ID =>"888888888888",
+              :Name=>"foobar1",
+              :PublicKey=>"ssh-rsa dummy"},
             {"Index"=>1,
-              "ID"=>"999999999999",
-              "Description"=>"",
-              "PublicKey"=>"ssh-rsa dummy",
-              "CreatedAt"=>"2014-01-21T12:44:39+09:00"}
-              ],
-           "is_ok"=>true
+              :ID=>"999999999999",
+              :Name=>"foobar2",
+              :PublicKey=>"ssh-rsa dummy"}
+            ]
           }
           response
         end
