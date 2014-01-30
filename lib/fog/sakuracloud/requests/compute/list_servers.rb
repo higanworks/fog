@@ -16,11 +16,13 @@ module Fog
       end
 
       class Mock
-        def list_disks(options = {})
+        def list_servers(options = {})
           response = Excon::Response.new
           response.status = 200
           response.body = {
+          "Servers" => []
           }
+          response
         end
       end
     end

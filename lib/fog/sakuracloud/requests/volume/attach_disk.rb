@@ -17,6 +17,16 @@ module Fog
           )
         end
       end # Real
+
+      class Mock
+        def attach_disk(options = {})
+          response = Excon::Response.new
+          response.status = 200
+          response.body = {
+          }
+          response
+        end
+      end
     end # SakuraCloud
   end # Volume
 end # Fog

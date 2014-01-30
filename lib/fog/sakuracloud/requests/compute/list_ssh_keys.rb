@@ -16,11 +16,11 @@ module Fog
       end
 
       class Mock
-        def list_disks(options = {})
+        def list_ssh_keys(options = {})
           response = Excon::Response.new
           response.status = 200
           response.body = {
-           "SSHKeys"=>
+          "SSHKeys"=>
             [
             {"Index"=>0,
               "ID"=>"888888888888",

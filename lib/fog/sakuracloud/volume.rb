@@ -53,8 +53,36 @@ module Fog
       end
 
       class Mock
-        def initialize(options = {})
+
+        def self.data
+          @data ||= Hash.new do |hash, key|
+            hash[key] = {
+              :disks => [],
+              :plans => [],
+              :archives => []
+            }
+          end
         end
+
+        def self.reset
+          @data = nil
+        end
+
+        def initialize(options={})
+          @sakuracloud_api_token        = options[:sakuracloud_api_token]
+          @sakuracloud_api_token_secret = options[:sakuracloud_api_token_secret]
+        end
+
+        def data
+          self.class.data[@sakuracloud_api_token]
+          self.class.data[@sakuracloud_api_token_secret]
+        end
+
+        def reset_data
+          self.class.data.delete(@sakuracloud_api_token)
+          self.class.data.delete(@sakuracloud_api_token_secret)
+        end
+
       end
 
     end #SakuraCloud

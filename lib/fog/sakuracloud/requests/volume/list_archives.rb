@@ -20,7 +20,19 @@ module Fog
           response = Excon::Response.new
           response.status = 200
           response.body = {
+          "Archives" =>
+            [
+            {"Index"=>0,
+              :ID=>112500514887,
+              :Name=>"CentOS 5.10 64bit (基本セット)",
+              "Availability"=>"available"},
+            {"Index"=>1,
+              :ID=>112500571575,
+              :Name=>"CentOS 6.5 64bit (基本セット)",
+              "Availability"=>"available"}
+            ]
           }
+          response
         end
       end
     end
